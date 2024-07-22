@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Course</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: skyblue;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            background-color: darkslategray;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: darkolivegreen;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+
+        .back-btn:hover {
+            background-color: darkolivegreen;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: slategray;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+            color: #ecf0f1;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            color: #ecf0f1;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #34495e;
+            padding-bottom: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #ecf0f1;
+            font-size: 16px;
+            padding: 10px 15px;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #34495e;
+            color: #ecf0f1;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            overflow-y: auto;
+        }
+
+        .content h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .video-container iframe {
+            width: 80%;
+            height: 350px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /* Scroll-to-top button styles */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: darkslategray;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 1000;
+        }
+
+        .scroll-to-top:hover {
+            background-color: teal;
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @keyframes headerBackgroundChange {
+            0% {
+                background-color: skyblue;
+            }
+
+            25% {
+                background-color: lightcoral;
+            }
+
+            50% {
+                background-color: lightgoldenrodyellow;
+            }
+
+            75% {
+                background-color: lightgreen;
+            }
+
+            100% {
+                background-color: lightseagreen;
+            }
+        }
+
+
+        @keyframes headerTextColorChange {
+            0% {
+                color: darkred;
+            }
+
+            25% {
+                color: lightgrey;
+            }
+
+            50% {
+                color: black;
+            }
+
+            75% {
+                color: darkblue;
+            }
+
+            100% {
+                color: yellow;
+            }
+        }
+
+
+        header {
+            animation: headerBackgroundChange 10s infinite alternate, headerTextColorChange 15s infinite alternate;
+        }
+
+        .back-btn {
+            animation: buttonColorChange 5s infinite alternate;
+        }
+
+        @keyframes buttonColorChange {
+            0% {
+                background-color: darkslategray;
+            }
+
+            50% {
+                background-color: teal;
+            }
+
+            100% {
+                background-color: darkcyan;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 10px 20px;
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .video-container iframe {
+                width: 100%;
+                height: 300px;
+            }
+        }
+
+
+        @media (max-width: 480px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 10px 10px;
+                border-right: none;
+                text-decoration: none;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .sidebar h1 li a {
+                text-decoration: none;
+            }
+
+            .back-btn {
+                left: 10px;
+                top: 10px;
+                padding: 8px 5px;
+            }
+
+            header h1 {
+                font-size: 1.2em;
+                text-decoration: none;
+                padding: 15px 5px;
+            }
+
+            .video-container iframe {
+                width: 100%;
+                height: 250px;
+                position: absolute;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header style="background-color:skyblue;">
+        <a href="index.html" class="back-btn" style="border-radius: 30px;"> Back to All Courses</a>
+        <h1>Welcome to Gowthamraj network courses</h1>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <a href="#">
+                <h1>Lessons</h1>
+            </a>
+            <ul>
+                <strong>
+                    <li><a href="#"> * Agile Software Development in Tamil - Introduction</a>
+                    </li>
+                </strong>
+                <strong>
+                    <li><a href="#">* Agile Benefits</a></li>
+                </strong>
+
+            </ul>
+        </aside>
+        <main class="content">
+            <h2>Click Each Lesson to view Course Videos.</h2>
+            <br>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/8eVXTyIZ1Hs" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </main>
+    </div>
+    <script>
+
+        function toggleScrollButton() {
+            const scrollButton = document.querySelector('.scroll-to-top');
+            if (window.scrollY > 300) {
+                scrollButton.classList.add('show');
+            } else {
+                scrollButton.classList.remove('show');
+            }
+        }
+
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener('scroll', toggleScrollButton);
+        document.querySelector('.scroll-to-top').addEventListener('click', scrollToTop);
+
+    </script>
+</body>
+
+</html>
